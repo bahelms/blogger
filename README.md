@@ -3,11 +3,12 @@ This is a simple blogging application.
 Currently working on
 ----
 * Users
+* Bootstrap CSS
+* Navigation
 
 Things to Add
 ----
 * Session management
-* Bootstrap CSS
 * Blog Articles
 * Article comments
 * Article tags

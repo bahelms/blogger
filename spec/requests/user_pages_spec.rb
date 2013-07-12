@@ -12,6 +12,6 @@ describe "User Pages" do
     it { should have_content("Email") }
     it { should have_content("Password") }
     it { should have_content("Confirm Password") }
-    it { should have_content("Create Account") }
+    it { should have_button("Create Account") }
   end
 end
