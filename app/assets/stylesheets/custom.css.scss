@@ -1,5 +1,60 @@
 @import "bootstrap";
 
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 h1 {
   text-align: center;
+}
+
+input, textarea {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  @include box-sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+/* Errors */
+#error_explanation {
+  color: #f00;
+  font-size: 12px;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid #eaeaea;
+  margin-top: 45px;
+  padding-top: 5px;
+  a {
+    color: #555;
+    &:hover {
+      color: #222;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      margin-left: 10px;
+    }
+  }
 }
