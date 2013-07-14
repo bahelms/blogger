@@ -8,13 +8,24 @@ describe User do
   it { should respond_to :username }
   it { should respond_to :email }
 
-  it "is invalid without a username" do
-    user = build(:user, username: nil)
-    expect(user).not_to be_valid
-  end
+  describe "validations" do
+    context "when username is not present" do
+      before { subject.username = nil }
+      it { should_not be_valid }
+    end
 
-  it "is invalid without an email" do
-    user = build(:user, email: nil)
-    expect(user).not_to be_valid
+    context "when username is too long" do
+      before { subject.username = 'a' * 41 }
+      it { should_not be_valid }
+    end
+
+    context "when email is not present" do
+      before { subject.email = nil }
+      it { should_not be_valid }
+    end
+
+    context "when password is not present" do
+      before {  }
+    end
   end
 end
