@@ -12,6 +12,7 @@ Things to Add
 * Blog Articles
 * Article comments
 * Article tags
+* Email to create account
 
 Tests not currently used
 ----
