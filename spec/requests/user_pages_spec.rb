@@ -39,6 +39,8 @@ describe "User Pages" do
         let(:user) { User.find_by(email: "foo@foobar.com") }
 
         it { should have_title(full_title(user.username)) }
+        it { should have_selector('h1', text: user.username) }
+        it { should have_success_message('Welcome to Blogger!') }
       end
     end
   end

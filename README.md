@@ -13,6 +13,7 @@ Things to Add
 * Article comments
 * Article tags
 * Email to create account
+* Upload profile picture
 
 Tests not currently used
 ----
