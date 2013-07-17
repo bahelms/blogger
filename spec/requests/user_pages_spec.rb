@@ -56,7 +56,6 @@ describe "User Pages" do
 
   describe "edit" do
     before do
-      visit signin_path
       sign_in user
       visit edit_user_path(user)
     end

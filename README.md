@@ -3,7 +3,8 @@ This is a simple blogging application.
 Currently working on
 ----
 * Users -- Edit page
-* Session management -- Authentication specs
+* Review specs
+* Figure out home page (static_page controller)
 
 Things to Add
 ----
