@@ -2,18 +2,18 @@ This is a simple blogging application.
 
 Currently working on
 ----
-* Users
-* Bootstrap CSS
-* Navigation
+* Users -- Edit page
+* Session management -- Authentication specs
 
 Things to Add
 ----
-* Session management
 * Blog Articles
 * Article comments
 * Article tags
 * Email to create account
 * Upload profile picture
+* Test layout
+* User can delete their account
 
 Tests not currently used
 ----

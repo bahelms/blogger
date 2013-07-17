@@ -6,10 +6,11 @@ describe User do
 
   it { should respond_to :username }
   it { should respond_to :email }
-  it { should respond_to :password }
-  it { should respond_to :password_confirmation }
   it { should respond_to :password_digest }
   it { should respond_to :remember_token }
+  it { should respond_to :password }
+  it { should respond_to :password_confirmation }
+  it { should respond_to :authenticate }
   it { should be_valid }
 
   describe "validations" do
@@ -56,9 +57,7 @@ describe User do
         expect(subject.reload.email).to eq 'foobar@bob.com'
       end
     end
-  end
 
-  describe "passwords" do
     context "when password is not present" do
       before { @user = build(:user, password: nil) }
       specify { expect(@user).not_to be_valid }
@@ -77,6 +76,26 @@ describe User do
     context "when password confirmation doesn't match password" do
       before { subject.password_confirmation = 'mismatch' }
       it { should_not be_valid }
+    end
+  end
+
+  describe "remember token" do
+    before { subject.save }
+    its(:remember_token) { should_not be_blank }
+  end
+
+  describe "authenticate method" do
+    before { subject.save }
+    let(:found_user) { User.find_by(email: subject.email) }
+
+    context "with valid password" do
+      it { should eq found_user.authenticate(subject.password) }
+    end
+
+    context "with invalid password" do
+      let(:invalid_user) { found_user.authenticate('invalid') }
+      it { should_not eq invalid_user }
+      specify { expect(invalid_user).to be_false }
     end
   end
 end

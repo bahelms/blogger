@@ -1,0 +1,17 @@
+<%= provide(:title, 'Sign In') %>
+<h1>Sign In</h1>
+
+<div class='row'>
+  <div class='span4 offset4'>
+    <%= form_tag(sessions_path) do %>
+      <%= label_tag 'Email' %>
+      <%= text_field_tag 'email' %>
+
+      <%= label_tag 'Password' %>
+      <%= password_field_tag 'password' %>
+
+      <%= submit_tag 'Sign In', class: 'btn btn-primary' %>
+    <% end %>
+    <p>Need an Account? <%= link_to "Sign Up", signup_path %></p>
+  </div>
+</div>

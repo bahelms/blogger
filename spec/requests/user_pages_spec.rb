@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "User Pages" do
+  let(:user) { create(:user) }
   subject { page }
 
   describe "signup page" do
@@ -38,10 +39,28 @@ describe "User Pages" do
         before { click_button submit }
         let(:user) { User.find_by(email: "foo@foobar.com") }
 
+        it { should have_link('Sign Out') }
         it { should have_title(full_title(user.username)) }
-        it { should have_selector('h1', text: user.username) }
         it { should have_success_message('Welcome to Blogger!') }
       end
     end
+  end
+
+  describe "profile page" do
+    before { visit user_path(user) }
+
+    it { should have_title(full_title(user.username)) }
+    it { should have_selector('h1', text: user.username) }
+    it { should have_selector('h2', text: 'Recent Blog Posts') }
+  end
+
+  describe "edit" do
+    before do
+      visit signin_path
+      sign_in user
+      visit edit_user_path(user)
+    end
+
+    it { should have_title(full_title("Edit Your Profile")) }
   end
 end
