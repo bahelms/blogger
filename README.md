@@ -3,7 +3,6 @@ This is a simple blogging application.
 Currently working on
 ----
 * Users -- Edit page
-* Review specs
 * Figure out home page (static_page controller)
 
 Things to Add
@@ -15,6 +14,7 @@ Things to Add
 * Upload profile picture
 * Test layout
 * User can delete their account
+* Responsive Bootstrap CSS
 
 Tests not currently used
 ----

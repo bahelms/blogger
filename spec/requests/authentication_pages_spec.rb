@@ -10,8 +10,8 @@ describe "Authentication" do
     it { should have_title('Sign In') }
     it { should have_content('Sign In') }
     it { should have_selector('label', text: 'Email') }
-    it { should have_selector('input#email') }
     it { should have_selector('label', text: 'Password') }
+    it { should have_selector('input#email') }
     it { should have_selector('input#password') }
     it { should have_button('Sign In') }
 
@@ -38,7 +38,13 @@ describe "Authentication" do
 
       describe "following signout" do
         before { click_link 'Sign Out' }
+
+        it { should have_title(full_title('Sign In')) }
         it { should have_link('Sign In', href: signin_path) }
+        it { should_not have_link('Sign Out') }
+        it { should_not have_link('View Your Profile') }
+        it { should_not have_link('Edit Your Profile') }
+        it { should_not have_link('Delete Account') }
       end
     end
   end

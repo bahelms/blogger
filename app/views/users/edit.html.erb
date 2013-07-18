@@ -1,1 +1,11 @@
 <%= provide(:title, "Edit Your Profile") %>
+<h1>Edit Your Profile</h1>
+
+<div class="row">
+  <div class="span4 offset4">
+    <%= form_for @user do |f| %>
+      <%= render 'form_fields', f: f %>
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+    <% end %>  
+  </div>
+</div>

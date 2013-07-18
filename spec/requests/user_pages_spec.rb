@@ -52,6 +52,7 @@ describe "User Pages" do
     it { should have_title(full_title(user.username)) }
     it { should have_selector('h1', text: user.username) }
     it { should have_selector('h2', text: 'Recent Blog Posts') }
+    it { should have_content('Bio:') }
   end
 
   describe "edit" do
@@ -60,6 +61,24 @@ describe "User Pages" do
       visit edit_user_path(user)
     end
 
-    it { should have_title(full_title("Edit Your Profile")) }
+    describe "page" do
+      it { should have_title(full_title('Edit Your Profile')) }
+      it { should have_selector('h1',    text: 'Edit Your Profile') }
+      it { should have_selector('label', text: 'Username') }
+      it { should have_selector('label', text: 'Email') }
+      it { should have_selector('label', text: 'Password') }
+      it { should have_selector('label', text: 'Confirm Password') }
+      it { should have_selector('input#user_username') }
+      it { should have_selector('input#user_email') }
+      it { should have_selector('input#user_password') }
+      it { should have_selector('input#user_password_confirmation') }
+      it { should have_button('Update') }
+    end
+
+    describe "with invalid information" do
+      before { click_button 'Update' }
+
+      it { should have_content('error') }
+    end
   end
 end
