@@ -2,7 +2,7 @@ This is a simple blogging application.
 
 Currently working on
 ----
-* Users -- Edit page
+* User can delete their account -- Destroy action
 * Figure out home page (static_page controller)
 
 Things to Add
@@ -13,7 +13,6 @@ Things to Add
 * Email to create account
 * Upload profile picture
 * Test layout
-* User can delete their account
 * Responsive Bootstrap CSS
 
 Tests not currently used

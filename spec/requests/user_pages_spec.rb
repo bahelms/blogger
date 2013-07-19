@@ -73,12 +73,29 @@ describe "User Pages" do
       it { should have_selector('input#user_password') }
       it { should have_selector('input#user_password_confirmation') }
       it { should have_button('Update') }
+      it { should have_link('Delete Account', href: '#') }
     end
 
     describe "with invalid information" do
       before { click_button 'Update' }
 
       it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      before do
+        fill_in 'Username',         with: 'New Name'
+        fill_in 'Email',            with: 'NewEmail@foobar.com'
+        fill_in 'Password',         with: user.password
+        fill_in 'Confirm Password', with: user.password
+        click_button 'Update'
+      end
+
+      it { should have_title(full_title('New Name')) }
+      it { should have_selector('h1', text: 'New Name') }
+      it { should have_content('newemail@foobar.com') }
+      specify { expect(user.reload.username).to eq 'New Name' }
+      specify { expect(user.reload.email).to eq 'newemail@foobar.com' }
     end
   end
 end

@@ -33,7 +33,6 @@ describe "Authentication" do
       it { should have_link('Sign Out',          href: signout_path) }
       it { should have_link('View Your Profile', href: user_path(user)) }
       it { should have_link('Edit Your Profile', href: edit_user_path(user)) }
-      it { should have_link('Delete Account',    href: '#') }
       it { should_not have_link('Sign In',       href: signin_path) }
 
       describe "following signout" do
@@ -83,8 +82,7 @@ describe "Authentication" do
 
         describe "after signing in" do
           it "should display the desired page" do
-            expect(page).to have_title('Edit Your Profile')
-          end
+            expect(page).to have_title('Edit Your Profile') end
 
           describe "after signing in again" do
             before do
@@ -112,7 +110,7 @@ describe "Authentication" do
 
       describe "submitting a PATCH request to another user's update action" do
         before { patch user_path(wrong_user) }
-        specify { expect(response).to redirect_to(root_path) }
+        specify { expect(response).to redirect_to(signin_path) }
       end
     end
   end
