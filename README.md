@@ -14,6 +14,7 @@ Things to Add
 * Upload profile picture
 * Test layout
 * Responsive Bootstrap CSS
+* Edit User profile without requiring password
 
 Tests not currently used
 ----

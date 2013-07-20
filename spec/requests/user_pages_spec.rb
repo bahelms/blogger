@@ -73,7 +73,7 @@ describe "User Pages" do
       it { should have_selector('input#user_password') }
       it { should have_selector('input#user_password_confirmation') }
       it { should have_button('Update') }
-      it { should have_link('Delete Account', href: '#') }
+      it { should have_link('Delete Account', href: user_path(user)) }
     end
 
     describe "with invalid information" do
@@ -96,6 +96,12 @@ describe "User Pages" do
       it { should have_content('newemail@foobar.com') }
       specify { expect(user.reload.username).to eq 'New Name' }
       specify { expect(user.reload.email).to eq 'newemail@foobar.com' }
+    end
+
+    describe "delete account link" do
+      it "should delete the current user's account" do
+        expect { click_link 'Delete Account' }.to change(User, :count).by(-1)
+      end
     end
   end
 end
