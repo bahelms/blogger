@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :articles, dependent: :destroy
+  
   has_secure_password
   validates :username, presence: true, 
                        length: { maximum: 40 },

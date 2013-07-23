@@ -52,7 +52,7 @@ describe "User Pages" do
     it { should have_title(full_title(user.username)) }
     it { should have_selector('h1', text: user.username) }
     it { should have_selector('h2', text: 'Recent Blog Posts') }
-    it { should have_content('Bio:') }
+    it { should have_content('Bio') }
   end
 
   describe "edit" do
@@ -66,10 +66,12 @@ describe "User Pages" do
       it { should have_selector('h1',    text: 'Edit Your Profile') }
       it { should have_selector('label', text: 'Username') }
       it { should have_selector('label', text: 'Email') }
+      it { should have_selector('label', text: 'Bio') }
       it { should have_selector('label', text: 'Password') }
       it { should have_selector('label', text: 'Confirm Password') }
       it { should have_selector('input#user_username') }
       it { should have_selector('input#user_email') }
+      it { should have_selector('textarea#user_bio') }
       it { should have_selector('input#user_password') }
       it { should have_selector('input#user_password_confirmation') }
       it { should have_button('Update') }
@@ -86,6 +88,7 @@ describe "User Pages" do
       before do
         fill_in 'Username',         with: 'New Name'
         fill_in 'Email',            with: 'NewEmail@foobar.com'
+        fill_in 'Bio',              with: 'New Lorem Ipsum'
         fill_in 'Password',         with: user.password
         fill_in 'Confirm Password', with: user.password
         click_button 'Update'
@@ -94,17 +97,20 @@ describe "User Pages" do
       it { should have_title(full_title('New Name')) }
       it { should have_selector('h1', text: 'New Name') }
       it { should have_content('newemail@foobar.com') }
+      it { should have_content('New Lorem Ipsum') }
       specify { expect(user.reload.username).to eq 'New Name' }
       specify { expect(user.reload.email).to eq 'newemail@foobar.com' }
     end
 
-    describe "deleting user account" do
+    describe "Delete Account link" do
       it "should delete the current user's account" do
         expect { click_link 'Delete Account' }.to change(User, :count).by(-1)
       end
 
-      before { delete user_path(user) }
-      specify { expect(response).to redirect_to(root_path) }
+      describe "redirection" do
+        before { delete user_path(user) }
+        specify { expect(response).to redirect_to(root_path) }
+      end
     end
   end
 end

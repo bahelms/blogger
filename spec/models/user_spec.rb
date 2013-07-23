@@ -6,6 +6,7 @@ describe User do
 
   it { should respond_to :username }
   it { should respond_to :email }
+  it { should respond_to :bio }
   it { should respond_to :password_digest }
   it { should respond_to :remember_token }
   it { should respond_to :password }
@@ -58,6 +59,11 @@ describe User do
       end
     end
 
+    context "when bio is not present" do
+      before { subject.bio = nil }
+      it { should be_valid }
+    end
+
     context "when password is not present" do
       before { @user = build(:user, password: nil) }
       specify { expect(@user).not_to be_valid }
@@ -96,6 +102,30 @@ describe User do
       let(:invalid_user) { found_user.authenticate('invalid') }
       it { should_not eq invalid_user }
       specify { expect(invalid_user).to be_false }
+    end
+  end
+
+  # Article tests
+  describe "article associations" do
+    before { subject.save }
+    let!(:old_article) { create(:article, user: subject, created_at: 1.day.ago) }
+    let!(:new_article) { create(:article, user: subject, created_at: 1.hour.ago) }
+
+    it "should have two articles" do
+      expect(subject.articles.size).to eq 2
+    end
+
+    it "should have articles from newest to oldest" do
+      expect(subject.articles.to_a).to eq [new_article, old_article]
+    end
+
+    it "should destroy associated articles" do
+      articles = subject.articles.to_a
+      subject.destroy
+      expect(articles).not_to be_empty
+      articles.each do |article|
+        expect(Article.where(id: article.id)).to be_empty
+      end
     end
   end
 end

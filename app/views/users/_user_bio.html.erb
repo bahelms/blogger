@@ -1,3 +1,5 @@
-<p>Name: <%= @user.username %></p>
-<p>Email: <%= @user.email %></p>
-<p>Bio: </p>
+<p><span class="stats">Name</span>: <%= @user.username %></p>
+<p><span class="stats">Email</span>: <%= @user.email %></p>
+<p id="bio"><span class="stats">Bio</span>
+  <div class="span3"><%= @user.bio %></div>
+</p>
