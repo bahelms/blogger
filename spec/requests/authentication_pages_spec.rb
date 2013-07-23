@@ -60,7 +60,7 @@ describe "Authentication" do
 
         context "submitting to the update action" do
           before { patch user_path(user) }
-          specify { expect(response).to redirect_to(signin_path) }
+          specify { expect(response).to redirect_to(root_path) }
         end
 
         context "visiting the signup page" do
@@ -75,7 +75,7 @@ describe "Authentication" do
 
         context "submitting to the destroy action" do
           before { delete user_path(user) }
-          specify { expect(response).to redirect_to(signin_path) }
+          specify { expect(response).to redirect_to(root_path) }
         end
       end
 
@@ -115,12 +115,12 @@ describe "Authentication" do
 
       describe "submitting a PATCH request to another user's update action" do
         before { patch user_path(wrong_user) }
-        specify { expect(response).to redirect_to(signin_path) }
+        specify { expect(response).to redirect_to(root_path) }
       end
 
       describe "submitting a DELETE request to another user's destroy action" do
         before { delete user_path(wrong_user) }
-        specify { expect(response).to redirect_to(signin_path) }
+        specify { expect(response).to redirect_to(root_path) }
       end
     end
   end

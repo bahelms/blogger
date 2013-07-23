@@ -98,10 +98,13 @@ describe "User Pages" do
       specify { expect(user.reload.email).to eq 'newemail@foobar.com' }
     end
 
-    describe "delete account link" do
+    describe "deleting user account" do
       it "should delete the current user's account" do
         expect { click_link 'Delete Account' }.to change(User, :count).by(-1)
       end
+
+      before { delete user_path(user) }
+      specify { expect(response).to redirect_to(root_path) }
     end
   end
 end
