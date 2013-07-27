@@ -3,6 +3,7 @@ This is a simple blogging application.
 Currently working on
 ----
 * Blog Articles
+* Bio text wrap -- tests failing
 
 Things to Add
 ----
