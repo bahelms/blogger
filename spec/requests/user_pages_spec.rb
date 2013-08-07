@@ -47,12 +47,19 @@ describe "User Pages" do
   end
 
   describe "profile page" do
+    let!(:article1) { create(:article, user: user) }
+    let!(:article2) { create(:article, user: user) }
     before { visit user_path(user) }
 
     it { should have_title(full_title(user.username)) }
     it { should have_selector('h1', text: user.username) }
     it { should have_selector('h2', text: 'Recent Blog Posts') }
     it { should have_content('Bio') }
+
+    describe "articles" do
+      it { should have_content(user.articles.count) }
+      it { should have_content(article1.content) }
+    end
   end
 
   describe "edit" do

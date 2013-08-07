@@ -10,8 +10,8 @@ FactoryGirl.define do
   end
 
   factory :article do
-    title 'Article Title'
-    content 'Lorem Ipsum'
+    sequence(:title) { |n| "Article No. #{n}" }
+    sequence(:content) { |n| "Article No. #{n} content" }
     user
   end
 end

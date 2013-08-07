@@ -2,8 +2,7 @@ This is a simple blogging application.
 
 Currently working on
 ----
-* Blog Articles
-* Bio text wrap -- tests failing
+* Blog Articles - Show posts on user profile page
 
 Things to Add
 ----
