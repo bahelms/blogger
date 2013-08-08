@@ -13,12 +13,14 @@
   </section>
   <div class="row"> 
     <div class="span4">
-      <section id="posts">
+      <section class="offset1">
         <h2>Recent Blog Posts</h2>
         <div class="row">
-          <div class="span6">
+          <div class="span9">
             <% if @user.articles.any? %>
-              <h4>Articles (<%= @user.articles.count %>)</h4>
+              <div class="articles">
+                <%= render @articles %>
+              </div>
             <% end %>
           </div>
         </div>

@@ -56,9 +56,9 @@ describe "User Pages" do
     it { should have_selector('h2', text: 'Recent Blog Posts') }
     it { should have_content('Bio') }
 
-    describe "articles" do
-      it { should have_content(user.articles.count) }
+    describe "articles feed" do
       it { should have_content(article1.content) }
+      it { should have_content(article2.content) }
     end
   end
 
