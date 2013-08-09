@@ -1,0 +1,12 @@
+<%= provide(:title, "#{current_user.username} Blog Archive") %>
+
+<div class="row">
+  <div class="offset1"><h2>Blog Archives</h2></div>
+  <div class="span9 offset1">
+    <% if @articles.any? %>
+      <div class="articles">
+        <%= render @articles %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -48,14 +48,23 @@ describe User do
       it { should_not be_valid }
     end
 
-    context "when email has mixed case" do
-      before do
-        subject.email = 'fOObAr@BoB.CoM'
-        subject.save
-      end 
+    context "when email format is invalid" do
+      it "should be invalid" do
+        addresses = %w[foo#bar.com foo_bar.org foo@bar. bar@baz bob.com foo+bob]
+        addresses.each do |invalid_address|
+          subject.email = invalid_address
+          expect(subject).to be_invalid
+        end
+      end
+    end
 
-      it "should be saved in lowercase" do
-        expect(subject.reload.email).to eq 'foobar@bob.com'
+    context "when email format is valid" do
+      it "should be valid" do
+        addresses = %w[foo@bar.com F_OO-Bar@b.a.z.org foo.bar@baz.jp f+O@B.uk]
+        addresses.each do |valid_address|
+          subject.email = valid_address
+          expect(subject).to be_valid
+        end
       end
     end
 
