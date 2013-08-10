@@ -15,7 +15,7 @@ namespace :db do
     # Create articles
     users = User.all(limit: 6)
     5.times do
-      title = Faker::Lorem.word.capitalize
+      title = Faker::Lorem.sentence.capitalize
       content = Faker::Lorem.paragraphs.join
       users.each do |user| 
         user.articles.create!(title: title, content: content)

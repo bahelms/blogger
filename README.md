@@ -15,6 +15,7 @@ Things to Add
 * Remember me login
 * Reset password with email
 * Encrypt session remember_token
+* Show article.created_at in dynamic local time
 
 Design to Add
 ----

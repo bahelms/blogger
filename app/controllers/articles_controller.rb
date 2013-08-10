@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = current_user.articles
+    @user = User.find(params[:user_id])
+    @articles = @user.articles
   end
 
   def show
+    @article = Article.find(params[:id])
   end
 end

@@ -1,7 +1,7 @@
-<%= provide(:title, "#{current_user.username} Blog Archive") %>
+<%= provide(:title, "#{@user.username} Blog Archives") %>
 
 <div class="row">
-  <div class="offset1"><h2>Blog Archives</h2></div>
+  <div class="offset1"><h2><%= @user.username %> Blog Archives</h2></div>
   <div class="span9 offset1">
     <% if @articles.any? %>
       <div class="articles">

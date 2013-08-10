@@ -5,14 +5,16 @@ describe "Article pages" do
   let(:user) { create(:user) }
   let!(:article1) { create(:article, user: user) }
   let!(:article2) { create(:article, user: user) }
-  before { sign_in(user) }
 
   describe "index" do
-    before { visit articles_path }
+    let(:title) { "#{user.username} Blog Archives" }
+    before { visit user_articles_path(user) }
 
-    it { should have_title("#{user.username} Blog Archive") }
-    it { should have_content(article1.title) }
-    it { should have_content(article2.title) }
+    it { should have_title(title) }
+    it { should have_selector('h2', text: title) }
+    it { should have_content(article1.content) }
+    it { should have_content(article2.content) }
+    it { should have_link("#{article1.title}", href: article_path(article1)) }
   end
 
   describe "article creation" do
@@ -21,7 +23,7 @@ describe "Article pages" do
   describe "view article" do
     before { visit article_path(article1) }
 
-    # it { should have_title(article1.title) }
+    it { should have_title(article1.title) }
   end
 
   describe "article destruction" do

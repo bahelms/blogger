@@ -1,7 +1,10 @@
-<h4 class="title">
-  <%= article.title %>
-  <span class="timestamp">
-    <small>-- Posted <%= time_ago_in_words(article.created_at) %> ago.</small>
-  </span>
+<h4>
+  <span class="title"><%= link_to article.title, article %></span>
+  <small>
+    -- Posted 
+    <abbr class="timeago" title="<%= article.created_at %>">
+      <%= time_tag(article.created_at) %> UTC
+    </abbr>
+  </small>
 </h4>
-<span class="content"><%= article.content %></span>
+<div><%= article.content %></div>
