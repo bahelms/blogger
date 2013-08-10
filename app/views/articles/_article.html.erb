@@ -1,9 +1,8 @@
 <h4>
-  <span class="title"><%= link_to article.title, article %></span>
+  <div class="title"><%= link_to article.title, article %></div>
   <small>
-    -- Posted 
     <abbr class="timeago" title="<%= article.created_at %>">
-      <%= time_tag(article.created_at) %> UTC
+      <%= published_date(article.created_at) %>
     </abbr>
   </small>
 </h4>

@@ -25,3 +25,7 @@ def sign_in(user)
   fill_in "password", with: user.password
   click_button "Sign In"
 end
+
+def published_date(date)
+  date.strftime('%B %-d, %Y %l:%M %p UTC')
+end

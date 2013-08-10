@@ -24,6 +24,9 @@ describe "Article pages" do
     before { visit article_path(article1) }
 
     it { should have_title(article1.title) }
+    it { should have_selector('h2', text: article1.title) }
+    it { should have_content(published_date(article1.created_at)) }
+    it { should have_content(article1.content) }
   end
 
   describe "article destruction" do
