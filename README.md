@@ -2,11 +2,11 @@ This is a simple blogging application.
 
 Currently working on
 ----
-* Blog Articles - Show articles, 
-                  make interface for creating and updating,
-                  add edit/delete links to show pages only for correct user,
-                  put "new post" link on top right of navbar
-* Try bio stats in bootstrap span instead of wrapper
+* Blog Articles
+  * Improve Archives access on profile page
+  * Make interface for creating and updating
+  * Add edit/delete links to show pages only for correct user
+  * Put "new post" link on top right of navbar
 
 Things to Add
 ----
@@ -22,14 +22,14 @@ Things to Add
 * Encrypt session remember_token
 * Add static pages: About
 * Style:
-  Prev/Next links on Article pages
-  Show article.created_at in dynamic local time
+  * Prev/Next links on Article pages
+  * Show article.created_at in dynamic local time
 
 Design to Add
 ----
 * Responsive Bootstrap CSS
 * Edit profile layout
-* Edit bio directly on profile page
+* Edit bio directly on profile page (JS)
 
 Tests not currently used
 ----

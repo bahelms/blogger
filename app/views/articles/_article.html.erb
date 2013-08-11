@@ -1,9 +1,9 @@
-<h4>
-  <div class="title"><%= link_to article.title, article %></div>
-  <small>
+<div class="article-content">
+  <h4><%= link_to article.title, article %></h4>
+  <div><%= article.content %></div>
+  <small class="badge badge-success">
     <abbr class="timeago" title="<%= article.created_at %>">
       <%= published_date(article.created_at) %>
     </abbr>
   </small>
-</h4>
-<div><%= article.content %></div>
+</div>
