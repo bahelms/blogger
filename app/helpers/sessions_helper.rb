@@ -34,4 +34,17 @@ module SessionsHelper
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
   end
+
+  # Authorization
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+  end
+
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to root_path, notice: "Please sign in."
+    end
+  end
 end

@@ -58,7 +58,7 @@ describe "User Pages" do
     describe "articles feed" do
       it { should have_content(article1.content) }
       it { should have_content(article2.content) }
-      it { should have_selector('h2', text: 'Recent Blog Posts') }
+      it { should have_selector('h3', text: 'Recent Blog Posts') }
       it { should have_link("Archives", href: user_articles_path(user)) }
     end
   end

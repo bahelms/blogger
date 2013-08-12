@@ -33,6 +33,7 @@ describe "Authentication" do
       it { should have_link('Sign Out',          href: signout_path) }
       it { should have_link('View Your Profile', href: user_path(user)) }
       it { should have_link('Edit Your Profile', href: edit_user_path(user)) }
+      it { should have_link('New Post', href: new_user_article_path(user)) }
       it { should_not have_link('Sign In',       href: signin_path) }
 
       describe "following signout" do
@@ -43,6 +44,7 @@ describe "Authentication" do
         it { should_not have_link('Sign Out') }
         it { should_not have_link('View Your Profile') }
         it { should_not have_link('Edit Your Profile') }
+        it { should_not have_link('New Post') }
         it { should_not have_link('Delete Account') }
       end
     end
@@ -76,6 +78,13 @@ describe "Authentication" do
         context "submitting to the destroy action" do
           before { delete user_path(user) }
           specify { expect(response).to redirect_to(root_path) }
+        end
+      end
+
+      describe "in the Articles controller" do
+        context "visiting the new page" do
+          before { visit new_user_article_path(user) }
+          it { should have_title('Sign In') }
         end
       end
 
