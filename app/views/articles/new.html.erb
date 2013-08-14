@@ -1,1 +1,26 @@
 <%= provide(:title, "Write a New Article") %>
+<h1>Write a New Article</h1>
+
+<div class="row">
+  <div class="offset2">
+    <%= form_for [@user, @article] do |f| %>
+      <div class="row">
+        <div class="span4 offset2">
+          <%= render 'shared/error_messages', object: f.object %>
+        </div>
+      </div>
+    
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'span4' %>
+          
+      <div class="row">
+        <div class="span8">
+          <%= f.label :content %>
+          <%= f.text_area :content %>
+        </div>
+      </div>
+    
+      <%= f.submit "Publish", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

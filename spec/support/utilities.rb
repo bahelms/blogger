@@ -29,3 +29,8 @@ end
 def published_date(date)
   date.strftime('%B %-d, %Y %l:%M %p UTC')
 end
+
+def write_post(title, content)
+  fill_in 'Title',   with: title
+  fill_in 'Content', with: content
+end

@@ -8,7 +8,7 @@
       <div class="span9">
         <% if @user.articles.any? %>
           <div class="articles">
-            <%= render @articles %>
+            <%= render @user.articles %>
           </div>
         <% end %>
       </div>

@@ -3,8 +3,10 @@ This is a simple blogging application.
 Currently working on
 ----
 * Blog Articles
-  * Make interface for creating and updating
-  * Add edit/delete links to show pages only for correct user
+  * Finish create tests
+  * Make edit/update/delete articles
+  * Make article titles unique?
+  * Add edit/delete links to #show pages only for correct user
   * Put "new post" link on top right of navbar
   * Improve Archives access on profile page
 
