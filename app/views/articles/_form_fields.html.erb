@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="span4 offset2">
+    <%= render 'shared/error_messages', object: f.object %>
+  </div>
+</div>
+
+<%= f.label :title %>
+<%= f.text_field :title, class: 'span4' %>
+     
+<div class="row">
+  <div class="span8">
+    <%= f.label :content %>
+    <%= f.text_area :content, rows: '10' %>
+  </div>
+</div>

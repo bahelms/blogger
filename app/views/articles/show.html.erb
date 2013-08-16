@@ -1,10 +1,29 @@
 <%= provide(:title, @article.title) %>
-<div class="row">
-  <div class="span12"><h3 id="art-title"><%= @article.title %></h3></div>
-  <div class="span12" id="timestamp">
-    <small>Published <%= published_date(@article.created_at) %></small>
+<article>
+  <div class="row">
+    <div class="span12"><h2 id="art-title"><%= @article.title %></h2></div>
+    <div class="span12" id="time-created">
+      <small>Published <%= published_date(@article.created_at) %></small>
+    
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="span9 offset1 article"><%= @article.content %></div>
-</div>
+  <div class="row">
+    <div class="span9 offset1 article"><%= @article.content %></div>
+  </div>
+  <% if @article.created_at != @article.updated_at %>
+    <div class="row">
+      <div class="span12" id="time-updated">
+        <small>Last Updated <%= published_date(@article.updated_at) %></small>
+      </div>
+    </div>
+  <% end %>
+</article>
+<% if current_user?(@article.user) %>
+  <div class="row">
+    <div class="span12 update">
+      <%= link_to 'Edit Article', edit_article_path(@article), 
+                                  class: 'btn btn-primary' %>
+      <%= link_to 'Delete Article', @article, class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

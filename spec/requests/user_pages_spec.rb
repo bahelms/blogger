@@ -88,7 +88,6 @@ describe "User Pages" do
 
     describe "with invalid information" do
       before { click_button 'Update' }
-
       it { should have_content('error') }
     end
 

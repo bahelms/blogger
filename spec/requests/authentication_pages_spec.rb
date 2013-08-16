@@ -82,8 +82,25 @@ describe "Authentication" do
       end
 
       describe "in the Articles controller" do
+        let!(:article) { create(:article, user: user) }
+
         context "visiting the new page" do
           before { visit new_user_article_path(user) }
+          it { should have_title('Sign In') }
+        end
+
+        context "visiting an article page" do
+          before { visit article_path(article) }
+          it { should have_content(article.content) }
+        end
+
+        context "visiting the index page" do
+          before { visit user_articles_path(user) }
+          it { should have_content('Blog Archives') }
+        end
+
+        context "visiting the edit page" do
+          before { visit edit_article_path(article) }
           it { should have_title('Sign In') }
         end
       end
@@ -96,7 +113,8 @@ describe "Authentication" do
 
         describe "after signing in" do
           it "should display the desired page" do
-            expect(page).to have_title('Edit Your Profile') end
+            expect(page).to have_title('Edit Your Profile') 
+          end
 
           describe "after signing in again" do
             before do
@@ -115,21 +133,57 @@ describe "Authentication" do
     context "as wrong user" do
       let(:wrong_user) { create(:user, username: "bob", 
                                        email: 'wronguser@foobar.com') }
+      let(:wrong_article) { create(:article, user: wrong_user) }
       before { sign_in user }
 
-      describe "visiting another user's editing page" do
-        before { visit edit_user_path(wrong_user) }
-        it { should_not have_title('Edit Your Profile') }
-      end
+      context "on user pages" do
+        describe "visiting edit page" do
+          before { visit edit_user_path(wrong_user) }
+          it { should_not have_title('Edit Your Profile') }
+        end
 
-      describe "submitting a PATCH request to another user's update action" do
-        before { patch user_path(wrong_user) }
-        specify { expect(response).to redirect_to(root_path) }
-      end
+        describe "submitting a PATCH request to user's update action" do
+          before { patch user_path(wrong_user) }
+          specify { expect(response).to redirect_to(root_path) }
+        end
 
-      describe "submitting a DELETE request to another user's destroy action" do
-        before { delete user_path(wrong_user) }
-        specify { expect(response).to redirect_to(root_path) }
+        describe "submitting a DELETE request to user's destroy action" do
+          before { delete user_path(wrong_user) }
+          specify { expect(response).to redirect_to(root_path) }
+        end
+      end
+      
+      context "on article pages" do
+        describe "visiting another user's article" do
+          before { visit article_path(wrong_article) }
+          it { should_not have_button('Edit') }
+          it { should_not have_button('Delete') }
+        end
+
+        describe "visiting another user's 'new article' page" do
+          before { visit new_user_article_path(wrong_user) }
+          it { should_not have_button('Publish') }
+        end
+
+        describe "submitting a POST request to another user's article" do
+          before { post user_articles_path(wrong_user) }
+          specify { expect(response).to redirect_to(root_path) }
+        end
+
+        describe "visiting another user's 'edit article' page" do
+          before { visit edit_article_path(wrong_article) }
+          it { should_not have_button('Update') }
+        end
+
+        describe "submitting a PATCH request to another user's article" do
+          before { patch article_path(wrong_article) }
+          specify { expect(response).to redirect_to(root_path)}
+        end
+
+        describe "submitting a DELETE request to another user's article" do
+          before { delete article_path(wrong_article) }
+          specify { expect(response).to redirect_to(root_path)}
+        end
       end
     end
   end

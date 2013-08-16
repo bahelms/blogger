@@ -58,17 +58,72 @@ describe "Article pages" do
         let(:article) { Article.find_by(title: title) }
 
         it { should have_title(article.title) }
+        it { should have_selector('h2', text: article.title) }
+        it { should have_content(published_date(article.created_at)) }
+        it { should have_content(article.content) }
       end
     end
   end
 
-  describe "view article" do
+  describe "show article" do
     before { visit article_path(article1) }
 
     it { should have_title(article1.title) }
     it { should have_content(article1.title) }
     it { should have_content(published_date(article1.created_at)) }
     it { should have_content(article1.content) }
+    it { should_not have_link('Edit') }
+    it { should_not have_link('Delete') }
+
+    describe "when signed in" do
+      before do
+        sign_in user
+        visit article_path(article1)
+      end
+
+      it { should have_link('Edit', href: edit_article_path(article1)) }
+      it { should have_link('Delete', href: article_path(article1)) }
+    end
+  end
+
+  describe "edit" do
+    before do
+      sign_in user
+      visit edit_article_path(article2)
+    end
+
+    describe "page" do
+      it { should have_title(full_title("Edit \"#{article2.title}\"")) }
+      it { should have_selector('h1', text: "Edit \"#{article2.title}\"") }
+      it { should have_content('Title') }
+      it { should have_content('Content') }
+      it { should have_button('Update') }
+    end
+
+    describe "with invalid information" do
+      before do
+        fill_in 'Title',   with: ""
+        fill_in 'Content', with: ""
+        click_button 'Update'
+      end
+
+      it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      let(:title) { "A new article title" }
+      let(:content) { "A new bunch of content crap." }
+      before do
+        write_post(title, content)
+        click_button 'Update'
+      end
+
+      it { should have_title(title) }
+      it { should have_content(title) }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_content(published_date(article2.updated_at)) }
+      it { should have_content(content) }
+    end
   end
 
   describe "article destruction" do
