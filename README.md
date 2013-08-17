@@ -3,7 +3,7 @@ This is a simple blogging application.
 Currently working on
 ----
 * Blog Articles
-  * Make edit/update/delete articles
+  * Make delete articles
   * Refactor HTML/CSS
   * Make article titles unique?
   * Improve Archives access on profile page

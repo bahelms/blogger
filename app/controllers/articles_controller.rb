@@ -39,6 +39,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article.destroy
+    flash[:success] = "\"#{@article.title}\" was deleted."
+    redirect_to user_articles_path(current_user)
   end
 
   private

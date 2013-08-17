@@ -81,8 +81,23 @@ describe "Article pages" do
         visit article_path(article1)
       end
 
-      it { should have_link('Edit', href: edit_article_path(article1)) }
+      it { should have_link('Edit',   href: edit_article_path(article1)) }
       it { should have_link('Delete', href: article_path(article1)) }
+
+      describe "Delete Article link" do
+        it "should delete the current article" do
+          expect { click_link 'Delete' }.to change(Article, :count).by(-1)
+        end
+
+        describe "redirection" do
+          before do
+            visit article_path(article2)
+            click_link 'Delete'
+          end
+          
+          it { should have_content("\"#{article2.title}\" was deleted.") }
+        end
+      end
     end
   end
 
@@ -124,8 +139,5 @@ describe "Article pages" do
       it { should have_content(published_date(article2.updated_at)) }
       it { should have_content(content) }
     end
-  end
-
-  describe "article destruction" do
   end
 end
