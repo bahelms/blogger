@@ -3,11 +3,12 @@
     <nav>
       <div class="navbar">
         <div class="navbar-inner">
-          <ul class="nav"><li><%= link_to 'Home', root_path %></li></ul>
           <% if signed_in? %>
             <%= render 'layouts/signed_in_menu' %>
           <% else %>
-            <ul class="nav"><li><%= link_to 'Sign In', signin_path %></li></ul>
+            <ul class="nav">
+              <li><%= link_to "Welcome to Blogger", signin_path %></li>
+            </ul>
           <% end %>
         </div>  
       </div>
