@@ -21,7 +21,7 @@ describe "Authentication" do
       it { should have_error_message('Invalid email/password combination.') }
 
       describe "after visiting another page" do
-        before { click_link 'Home' }
+        before { visit signin_path }
         it { should_not have_error_message('Invalid') }
       end
     end
